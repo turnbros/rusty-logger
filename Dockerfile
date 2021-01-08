@@ -1,12 +1,19 @@
-FROM docker.pkg.github.com/turnbros/wireguard-sidecar/wireguard-sidecar:0.1.3
+FROM docker.pkg.github.com/turnbros/wireguard-sidecar/wireguard-sidecar:0.1.4
 
 ENV VERSION=7.10.1
 ENV PATH_CONFIG="/opt/filebeat"
+ENV PATH $PATH:/usr/share/filebeat
+
+RUN apk update && apk upgrade && \
+    apk add --no-cache wget libc6-compat
 
 RUN mkdir -p /opt/filebeat
 WORKDIR /opt/filebeat
-RUN curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${VERSION}-x86_64.rpm &&\
-    rpm -vi filebeat-${VERSION}-x86_64.rpm &&\
-    rm -rf /opt/filebeat/filebeat*.rpm
+
+RUN wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${VERSION}-linux-x86_64.tar.gz &&\
+    tar xzvf filebeat-${VERSION}-linux-x86_64.tar.gz &&\
+    mv filebeat-${VERSION}-linux-x86_64 /usr/share/filebeat &&\
+    mkdir /usr/share/filebeat/logs /usr/share/filebeat/data &&\
+    rm -rf ${PATH_CONFIG}/filebeat-${VERSION}-linux-x86_64.tar.gz
 
 CMD filebeat -f --path.config ${PATH_CONFIG}
