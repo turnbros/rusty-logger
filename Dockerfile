@@ -1,4 +1,4 @@
-FROM docker.pkg.github.com/turnbros/wireguard-sidecar/wireguard-sidecar:0.1.2
+FROM docker.pkg.github.com/turnbros/wireguard-sidecar/wireguard-sidecar:0.1.3
 
 ENV VERSION=7.10.1
 ENV PATH_CONFIG="/opt/filebeat"
