@@ -12,7 +12,7 @@ WORKDIR /opt/filebeat
 
 RUN wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-oss-${VERSION}-linux-x86_64.tar.gz &&\
     tar xzvf filebeat-oss-${VERSION}-linux-x86_64.tar.gz &&\
-    mv filebeat-oss-${VERSION}-linux-x86_64 /usr/share/filebeat &&\
+    mv filebeat-${VERSION}-linux-x86_64 /usr/share/filebeat &&\
     mkdir /usr/share/filebeat/logs /usr/share/filebeat/data &&\
     rm -rf ${PATH_CONFIG}/filebeat-oss-${VERSION}-linux-x86_64.tar.gz
 
