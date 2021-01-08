@@ -1,6 +1,6 @@
 FROM docker.pkg.github.com/turnbros/wireguard-sidecar/wireguard-sidecar:0.1.4
 
-ENV VERSION=7.10.1
+ENV VERSION=7.9.1
 ENV PATH_CONFIG="/opt/filebeat"
 ENV PATH $PATH:/usr/share/filebeat
 
@@ -10,7 +10,7 @@ RUN apk update && apk upgrade && \
 RUN mkdir -p /opt/filebeat
 WORKDIR /opt/filebeat
 
-RUN wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${VERSION}-linux-x86_64.tar.gz &&\
+RUN wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-oss-${VERSION}-linux-x86_64.tar.gz &&\
     tar xzvf filebeat-${VERSION}-linux-x86_64.tar.gz &&\
     mv filebeat-${VERSION}-linux-x86_64 /usr/share/filebeat &&\
     mkdir /usr/share/filebeat/logs /usr/share/filebeat/data &&\
