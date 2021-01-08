@@ -16,4 +16,4 @@ RUN wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${VERSIO
     mkdir /usr/share/filebeat/logs /usr/share/filebeat/data &&\
     rm -rf ${PATH_CONFIG}/filebeat-${VERSION}-linux-x86_64.tar.gz
 
-CMD filebeat -f --path.config ${PATH_CONFIG}
+CMD filebeat -f --path.home /usr/share/filebeat --path.config ${PATH_CONFIG} --path.data ${PATH_CONFIG}/data --path.logs ${PATH_CONFIG}/logs
